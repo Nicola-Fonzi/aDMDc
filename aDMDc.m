@@ -1,5 +1,5 @@
-function [] = eDMDc(Velocity,StartPoint)
- % function [] = eDMDc(Velocity,StartPoint)
+function [DMD_Matrices] = aDMDc(Velocity,StartPoint)
+ % function [DMD_Matrices] = aDMDc(Velocity,StartPoint)
  % 
  %
  % The function computes the linearisation State-Space matrices of a nonlinear
@@ -32,9 +32,9 @@ function [] = eDMDc(Velocity,StartPoint)
  % of StartPoint different from one. Otherwise, the user should set
  % StartPoint = 1.
  %
- % The result is saved in a structure in the same folder where all the
- % snapshots are saved. The struct is called DMD_Matrices.mat and contains
- % Atil, Btil, Ftil and Uhat.
+ % The result is saved in a structure and also saved in the same folder 
+ % where all the snapshots are saved. The struct is called DMD_Matrices.mat 
+ % and contains Atil, Btil, Ftil and Uhat.
  % x^{n+1} = Atil*x^{n} + Btil*u^{n} + Ftil*u^{n+1}
 
  
@@ -114,6 +114,12 @@ for i=1:length(diag(EIGtil))
     end
     break
 end
+
+% Construct the struct for immediate usage
+DMD_Matrices.Atil = Atil;
+DMD_Matrices.Btil = Btil;
+DMD_Matrices.Ftil = Ftil;
+DMD_Matrices.Uhat = Uhat;
 
 % We just save everything is a structure.
 save(strcat(pwd,filesep,'temp',filesep,'V',num2str(Velocity),filesep,'DMD_Matrices.mat'), 'Atil' , 'Btil' , 'Ftil' , 'Uhat');
