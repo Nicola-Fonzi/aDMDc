@@ -14,7 +14,6 @@ clear all; close all; clc
 % the simulation.
 
 %% Values required for the current example
-StartPoint = 201;           % We remove the initialisation steps
 Velocity = 60;              % Velocity used in the example
 dt = 0.006;                 % time step, [s]
 simTime = 3.0;              % simulation time, [s]

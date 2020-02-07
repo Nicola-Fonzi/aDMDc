@@ -50,6 +50,7 @@ Xp = Xp - Xmean;
 % Same as before for the input snapshots
 SnapshotLoad = load(strcat(pwd,filesep,'V',num2str(Velocity),filesep,'Snapshot_input.mat'));
 Snapshot_input = SnapshotLoad.Snapshot_input;
+clear SnapshotLoad
 UPS = Snapshot_input(:,1:end-1);
 UPSp = Snapshot_input(:,2:end);
 
@@ -118,5 +119,5 @@ DMD_Matrices.Uhat = Uhat;
 DMD_Matrices.Xmean = Xmean;
 
 % We just save everything is a structure.
-save(strcat(pwd,filesep,'V',num2str(Velocity),filesep,'DMD_Matrices.mat'), 'Atil' , 'Btil' , 'Ftil' , 'Uhat');
+save(strcat(pwd,filesep,'V',num2str(Velocity),filesep,'DMD_Matrices.mat'), 'Atil' , 'Btil' , 'Ftil' , 'Uhat' , 'Xmean');
 end

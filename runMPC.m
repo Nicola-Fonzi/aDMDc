@@ -81,9 +81,9 @@ for i = 1:(Nts+1)
     else
         if mod(i*dt,dtC) == 0
             % MPC
-            COSTFUN = @(u) ObjectiveFCN_modelsParam(u,N,xref(i),uHistory(:,i),...
+            COSTFUN = @(u) ObjectiveFCN(u,N,xref(i),uHistory(:,i),...
                 diag(Q),R,Ru,ROMs,inputMorphing(i-1),alpha(i),alpha(i-1));
-            CONSFUN = @(u) ConstraintFCN_modelsParam(u,uHistory(:,i),N,LBo,UBo,LBdu,UBdu);
+            CONSFUN = @(u) ConstraintFCN(u,uHistory(:,i),N,LBo,UBo,LBdu,UBdu);
             uopt  = fmincon(COSTFUN,uopt,[],[],[],[],LB,UB,CONSFUN,options);
             % smooth morphing actuation inputs
             inputMorphingD(i) = (uopt(1)-inputMorphing(i-1))*dt/dtC;    % actuation velocity
